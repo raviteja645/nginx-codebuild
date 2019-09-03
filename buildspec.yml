@@ -24,13 +24,12 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - service docker start
       - docker build -t nginx .
       - docker tag nginx:latest 161761483506.dkr.ecr.us-east-1.amazonaws.com/nginx:latest
       - docker push 161761483506.dkr.ecr.us-east-1.amazonaws.com/nginx:latest
   post_build:
     commands:
-      - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
+     # - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
       - echo Build stage successfully completed on `date`
       - echo Pushing the Docker image...
       - docker push $IMAGE_URI
