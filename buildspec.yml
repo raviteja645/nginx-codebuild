@@ -8,56 +8,11 @@
 # IMAGE_TAG
 
 version: 0.2
-runtimes:
-  android:
-    versions:
-      28:
-        requires:
-          java: ["openjdk8"]
-        commands:
-          - echo "Installing Android version 28 ..."
-java:
-    versions:
-      openjdk11:
-        commands:
-          - echo "Installing Java version 11 ..."
-
-          - export JAVA_HOME="$JAVA_11_HOME"
-
-          - export JRE_HOME="$JRE_11_HOME"
-
-          - export JDK_HOME="$JDK_11_HOME"
-
-          - |-
-            for tool_path in "$JAVA_HOME"/bin/*; 
-             do tool=`basename "$tool_path"`;
-              if [ $tool != 'java-rmi.cgi' ]; 
-              then 
-               update-alternatives --list "$tool" | grep -q "$tool_path" \
-                && update-alternatives --set "$tool" "$tool_path";
-              fi; 
-            done
-      openjdk8:
-        commands:
-          - echo "Installing Java version 8 ..."
-
-          - export JAVA_HOME="$JAVA_8_HOME"
-
-          - export JRE_HOME="$JRE_8_HOME"
-
-          - export JDK_HOME="$JDK_8_HOME"
-
-          - |-
-            for tool_path in "$JAVA_8_HOME"/bin/* "$JRE_8_HOME"/bin/*;
-             do tool=`basename "$tool_path"`;
-              if [ $tool != 'java-rmi.cgi' ];
-              then
-              update-alternatives --list "$tool" | grep -q "$tool_path" \
-               && update-alternatives --set "$tool" "$tool_path";
-              fi;
-            done
 
 phases:
+  install:
+    runtime-versions:
+      docker: 18
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
