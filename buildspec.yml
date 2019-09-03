@@ -8,6 +8,14 @@
 # IMAGE_TAG
 
 version: 0.2
+runtimes:
+  android:
+    versions:
+      28:
+        requires:
+          java: ["openjdk8"]
+        commands:
+          - echo "Installing Android version 28 ..."
 java:
     versions:
       openjdk11:
