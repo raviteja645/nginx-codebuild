@@ -12,6 +12,8 @@ phases:
   install:
     runtime-versions:
       java: openjdk8
+      java: openjdk11
+
 
 phases:
   pre_build:
