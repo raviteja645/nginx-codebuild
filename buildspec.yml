@@ -25,6 +25,8 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t nginx .
+      - docker tag nginx:latest 161761483506.dkr.ecr.us-east-1.amazonaws.com/nginx:latest
+      - docker push 161761483506.dkr.ecr.us-east-1.amazonaws.com/nginx:latest
   post_build:
     commands:
       - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
