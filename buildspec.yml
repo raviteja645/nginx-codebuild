@@ -24,6 +24,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
+      - sudo service docker start
       - docker build -t nginx .
       - docker tag nginx:latest 161761483506.dkr.ecr.us-east-1.amazonaws.com/nginx:latest
       - docker push 161761483506.dkr.ecr.us-east-1.amazonaws.com/nginx:latest
